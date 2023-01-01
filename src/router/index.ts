@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { clientRoute } from "@/clients/router";
+
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,6 +15,7 @@ const router = createRouter({
             name: "counter-2",
             component: () => import("@/counter/pages/Counter2Page.vue"),
         },
+        clientRoute,
     ],
 });
 
