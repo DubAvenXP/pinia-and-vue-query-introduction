@@ -8,6 +8,11 @@ const router = createRouter({
             name: "counter-1",
             component: () => import("@/counter/pages/Counter1Page.vue"),
         },
+        {
+            path: "/setup",
+            name: "counter-2",
+            component: () => import("@/counter/pages/Counter2Page.vue"),
+        },
     ],
 });
 
