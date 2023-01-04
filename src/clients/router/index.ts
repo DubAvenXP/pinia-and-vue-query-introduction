@@ -8,6 +8,11 @@ export const clientRoute: RouteRecordRaw = {
     component: () => import("@/clients/layout/ClientsLayout.vue"),
     children: [
         {
+            path: "",
+            name: "clients",
+            redirect: { name: `${ROUTE_NAME}-list` },
+        },
+        {
             path: "list",
             name: `${ROUTE_NAME}-list`,
             component: () => import("@/clients/pages/ListPage.vue"),
