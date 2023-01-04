@@ -6,8 +6,11 @@ import clientsApi from "@/api/clients-api";
 import type { Client } from "@/clients/interfaces/client";
 import { useClientStore } from "@/store";
 
-const getClients = async (): Promise<Client[]> => {
-    const { data } = await clientsApi.get<Client[]>("/clients?_page=1");
+const getClients = async (page: number): Promise<Client[]> => {
+
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const { data } = await clientsApi.get<Client[]>(`/clients?_page=${page}`);
     return data;
 };
 
@@ -15,8 +18,11 @@ const useClients = () => {
     const store = useClientStore();
     const { clients, currentPage, totalPages } = storeToRefs(store);
 
-    const { data, isLoading } = useQuery(["clients?page=", 1], () =>
-        getClients()
+    const { data, isLoading } = useQuery(["clients?page=", currentPage], () =>
+        getClients(currentPage.value),
+        {
+            staleTime: 1000 * 60, // 1 minute
+        }
     );
 
     watch(data, (clients) => {
@@ -32,11 +38,6 @@ const useClients = () => {
 
         // Methods
         getPage: store.setPage, // getPage: (page: number) => store.setPage(page)
-
-        // Getters
-        totalPageNumbers: computed(() =>
-            [...new Array(totalPages.value)].map((_, i) => i + 1)
-        ),
     };
 };
 
