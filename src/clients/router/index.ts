@@ -9,7 +9,7 @@ export const clientRoute: RouteRecordRaw = {
     children: [
         {
             path: "",
-            name: "clients",
+            name: ROUTE_NAME,
             redirect: { name: `${ROUTE_NAME}-list` },
         },
         {

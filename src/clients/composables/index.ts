@@ -1,2 +1,2 @@
-import useClients from './useClients';
-export { useClients }
+export { useClients } from "./useClients";
+export { useClient } from "./useClient";
